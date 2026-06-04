@@ -1,0 +1,63 @@
+You are an expert mathematician specializing in combinatorics. I will give you a combinatorics problem with three fields: `query`, `ref_answer`, and `user_intent`.
+
+Because such problems are often easy to guess from the final answer alone, you must force the model to exhibit an explicit combinatorial construction. Your job is to use `query`, `ref_answer`, and `user_intent` to produce:
+
+1. `instruction`
+2. `ref_construction`
+3. `verify_code_informal_plan` (ideas only, no executable code)
+
+Use the intent to determine the construction scope, such as:
+- a fixed `n`
+- the smallest feasible instance
+- one representative valid case
+- another explicitly requested scope
+
+You may also use the few-shot examples for guidance.
+
+## Requirements
+
+### 1) `instruction`
+Write `instruction` as a compact add-on that can be appended directly after `query`. It should make clear that the model is still solving the original combinatorics problem, while the required final deliverable is an explicit construction matching the scope implied by `user_intent`. **The instruction must not directly disclose or reference content related to `ref_answer`, nor include any information from the reference answer.** The instruction should use a Python-literal-friendly format unless the intent clearly calls for another format, and specify only the constraints needed to make the target construction and output format unambiguous. Avoid wording that turns the task into pure formatting or suppresses normal mathematical reasoning; the construction is the required answer form, not a replacement for the underlying problem-solving objective.
+
+### 2) `ref_construction`
+Write `ref_construction` as the exact object that satisfies `instruction` for the scoped task determined by `query`, `ref_answer`, and `user_intent`. It must be fully valid under the required format, concise but complete, and contain only the construction content itself, with no surrounding `<construct>` tags or any other XML/HTML markup.
+
+### 3) `verify_code_informal_plan`
+Write `verify_code_informal_plan` as a short verifier blueprint expressed only as numbered steps. It should describe how to parse the construction payload and check both format validity and mathematical correctness for the intended scope, without including executable code or pseudo-code that is too close to implementation.
+
+Important stdin assumption for the plan:
+- The runtime will pass the verifier only the raw construction payload itself.
+- The verifier should treat stdin as already containing the content inside the construction payload, not surrounding `<construct>...</construct>` tags or other wrapper text.
+- Therefore, do not instruct the verifier to extract XML/HTML tags, strip wrapper prose, or parse outer formatting before validating the construction object itself.
+
+## Hard constraints
+Do not change the mathematical meaning of `query` or `ref_answer`. Ensure that `instruction` and `ref_construction` match exactly, so that the reference construction would pass the stated contract without adjustment. The final output must be in English only.
+
+### Few-shot examples
+<<FEW_SHOT_EXAMPLES>>
+
+## Input
+
+### Query
+<<QUERY>>
+
+### Ref_answer
+<<REF_ANSWER>>
+
+### User_intent
+<<INTENT>>
+
+## Output format
+
+Return exactly one XML code block in the following order:
+
+<instruction>
+...
+</instruction>
+<ref_construction>
+...
+</ref_construction>
+<verify_code_informal_plan>
+1. ...
+2. ...
+</verify_code_informal_plan>

@@ -1,0 +1,5 @@
+numpy
+pyext
+PyYAML
+requests
+rich

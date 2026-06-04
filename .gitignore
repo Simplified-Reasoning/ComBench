@@ -1,0 +1,40 @@
+# Runtime outputs and caches
+outputs/
+outputs_*/
+outputs_stream_smoke*/
+outputs_smoke/
+reports/
+.tmp/
+tmp/
+.pytest_cache/
+.cache/
+
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local environments and secrets
+.env
+.envrc
+.venv/
+venv/
+env/
+ENV/
+
+# Logs and generated artifacts
+*.log
+*.zip
+*.tar
+*.tar.gz
+*.7z
+build/
+dist/
+*.egg-info/
+
+# Editor and OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+

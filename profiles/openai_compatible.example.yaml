@@ -1,0 +1,9 @@
+name: openai-compatible-example
+type: llm
+model_name: your-model-name
+base_url: "https://api.example.com/v1/"
+api_key_env: OPENAI_API_KEY
+temperature: 0.6
+timeout: 1200
+max_retries: 8
+

@@ -1,0 +1,48 @@
+You are an expert Python verifier engineer specializing in combinatorics-construction datasets. I will give you a combinatorics item with six fields: `query`, `ref_answer`, `instruction`, `ref_construction`, `user_intent_for_verify_code`, and few-shot examples.
+
+Because such tasks are easy to game with format-only outputs, your verifier must enforce both the required construction format and the mathematical constraints. Your job is to use all inputs to produce:
+
+1. `verify_code`
+
+Use the intent and few-shot examples to calibrate strictness and error handling style.
+
+## Requirements
+
+### 1) `verify_code`
+Write one deterministic Python script that validates candidate constructions for the target item. It should read full stdin, treating stdin as exactly the raw contents inside the construction payload rather than extracting from any surrounding tags or wrapper text. The verifier must stay compatible with the provided `instruction` and `ref_construction`: if they use a Python-literal representation, parse stdin with a strict Python-literal strategy such as `ast.literal_eval`, rather than converting the payload to JSON or assuming JSON syntax. The checks must cover structural validity and mathematical correctness implied by `query`, `ref_answer`, `instruction`, and `user_intent_for_verify_code`. Print `True` only when all required checks pass. On any parse or validation failure, print a concise English error message or validation-failure explanation that makes the failure point clear.
+
+The script should be robust and strict rather than permissive: reject malformed or ambiguous payloads, avoid fallback parsing paths not justified by `instruction`, and ensure behavior is fully deterministic. Do not silently reinterpret Python-literal structures into a different format family; for example, if the contract uses tuples, lists, dicts, or nested combinations of them, validate exactly that contract under Python-literal parsing. Prefer surfacing useful diagnostics: for parse exceptions print the exception message or a concise equivalent, and for failed checks print a short explanation of which condition did not pass.
+
+## Hard constraints
+Do not change the mathematical meaning of `query`, `ref_answer`, or `instruction`. Ensure the produced verifier is consistent with the provided `ref_construction` and reads constructions in a way that is compatible with that reference construction and instruction. Output must be English only. Inside the final XML wrapper, include only Python code (no prose, no markdown fences).
+
+## Input
+
+### Query
+<<QUERY>>
+
+### Ref_answer
+<<REF_ANSWER>>
+
+### Instruction
+<<INSTRUCTION>>
+
+### Ref_construction
+<<REF_CONSTRUCTION>>
+
+### User_intent_for_verify_code
+<<INTENT>>
+
+### Few-shot examples
+<<FEW_SHOT_EXAMPLES>>
+
+## Output format
+
+Return exactly one code block in the following form:
+
+```python
+...code only...
+```
+
+Important: output exactly one code block.
+The code must print exactly one line: `True`, or an English error / validation-failure message.
