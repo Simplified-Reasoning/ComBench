@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ComBench</title>
+  <meta name="description" content="ComBench: A benchmark for rigorous proof reasoning and constructive realization in Olympiad-level combinatorics.">
+  <style>
+    :root {
+      --bg: #f7f8fb;
+      --panel: #ffffff;
+      --ink: #17212f;
+      --muted: #5d6878;
+      --line: #d9dee8;
+      --teal: #167c80;
+      --blue: #345995;
+      --coral: #c75146;
+      --gold: #b8860b;
+      --green-soft: #eef8f5;
+      --blue-soft: #eef3fb;
+      --coral-soft: #fff1ee;
+      --shadow: 0 12px 34px rgba(23, 33, 47, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(217, 222, 232, 0.82);
+      background: rgba(247, 248, 251, 0.92);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .navlinks {
+      display: flex;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .navlinks a {
+      text-decoration: none;
+    }
+
+    .navlinks a:hover {
+      color: var(--ink);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 84vh;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background: #fbfcff;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("assets/taxonomy_donut.png");
+      background-repeat: no-repeat;
+      background-position: right 6vw center;
+      background-size: min(520px, 46vw);
+      opacity: 0.26;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 96px 0 58px;
+    }
+
+    .kicker {
+      color: var(--teal);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 12px 0 10px;
+      max-width: 760px;
+      font-size: clamp(48px, 8vw, 92px);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      max-width: 850px;
+      margin: 0;
+      font-size: clamp(20px, 3vw, 32px);
+      line-height: 1.18;
+      font-weight: 760;
+      color: #233044;
+    }
+
+    .abstract {
+      max-width: 820px;
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .authors {
+      max-width: 900px;
+      margin: 20px 0 0;
+      color: #344255;
+      font-size: 14px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 42px;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 9px 15px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #ffffff;
+      box-shadow: 0 4px 14px rgba(23, 33, 47, 0.06);
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 750;
+      text-decoration: none;
+    }
+
+    .button.primary {
+      border-color: #122237;
+      background: #122237;
+      color: #ffffff;
+    }
+
+    .button.disabled {
+      color: #7b8492;
+      cursor: default;
+      box-shadow: none;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 48px;
+    }
+
+    .stat {
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.92);
+      padding: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 25px;
+      line-height: 1;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.25;
+    }
+
+    main {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 54px 0 70px;
+    }
+
+    section {
+      margin-top: 54px;
+    }
+
+    section:first-child {
+      margin-top: 0;
+    }
+
+    .section-head {
+      max-width: 780px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(26px, 4vw, 38px);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 18px;
+      box-shadow: 0 8px 24px rgba(23, 33, 47, 0.05);
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .accent-teal {
+      border-top: 4px solid var(--teal);
+    }
+
+    .accent-blue {
+      border-top: 4px solid var(--blue);
+    }
+
+    .accent-coral {
+      border-top: 4px solid var(--coral);
+    }
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .figure-box {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+      padding: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .figure-box img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .caption {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+      box-shadow: var(--shadow);
+    }
+
+    table {
+      width: 100%;
+      min-width: 760px;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      padding: 10px 11px;
+      border-bottom: 1px solid #edf0f5;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    th:first-child,
+    td:first-child {
+      text-align: left;
+      font-weight: 720;
+    }
+
+    thead th {
+      background: #f2f5fa;
+      color: #27364b;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #fbfcfe;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .score-best {
+      color: var(--teal);
+      font-weight: 820;
+    }
+
+    .callout {
+      border: 1px solid #d7e7e5;
+      border-left: 5px solid var(--teal);
+      border-radius: 8px;
+      background: var(--green-soft);
+      padding: 18px;
+    }
+
+    .callout p {
+      margin: 0;
+      color: #2a4b4d;
+    }
+
+    .code-block {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #101722;
+      color: #eef3fb;
+      padding: 16px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 26px 0;
+      color: var(--muted);
+      text-align: center;
+      font-size: 13px;
+    }
+
+    @media (max-width: 860px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 12px 0;
+      }
+
+      .navlinks {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 2px;
+      }
+
+      .hero::before {
+        background-position: center bottom 12px;
+        background-size: min(420px, 82vw);
+        opacity: 0.18;
+      }
+
+      .hero-inner {
+        padding-top: 58px;
+      }
+
+      .stats,
+      .grid-3,
+      .media-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        margin-top: 34px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      table {
+        font-size: 13px;
+      }
+
+      th,
+      td {
+        padding: 9px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand" href="#">ComBench</a>
+      <div class="navlinks">
+        <a href="#overview">Overview</a>
+        <a href="#benchmark">Benchmark</a>
+        <a href="#results">Results</a>
+        <a href="#citation">Citation</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="kicker">Olympiad combinatorics benchmark</div>
+      <h1>ComBench</h1>
+      <p class="subtitle">A benchmark for rigorous proof reasoning and constructive realization in Olympiad-level combinatorics.</p>
+      <p class="abstract">
+        ComBench evaluates large language models on 100 human-annotated competition-level combinatorics problems.
+        It separates proof quality from explicit witness construction through rubric-guided judging and deterministic verifier-gated scoring.
+      </p>
+      <p class="authors">
+        Shunkai Zhang*, Haoran Zhang*, Yun Luo, Qianjia Cheng, Haodi Lei, Yizhuo Li, Runzhe Zhan, Zhilin Wang,
+        Bangjie Xu, Yucheng Su, Xinmiao Han, Xiaoye Qu, Dongrui Liu, Zhouchen Lin, Yu Qiao, Ning Ding, Yafu Li, Yu Cheng
+      </p>
+      <div class="actions" aria-label="Resources">
+        <a class="button disabled" href="#" aria-disabled="true">Paper coming soon</a>
+        <a class="button primary" href="https://github.com/Simplified-Reasoning/ComBench">Code</a>
+        <a class="button disabled" href="#" aria-disabled="true">Dataset coming soon</a>
+        <a class="button disabled" href="#" aria-disabled="true">Results coming soon</a>
+      </div>
+      <div class="stats" aria-label="Benchmark statistics">
+        <div class="stat"><strong>100</strong><span>Competition-level problems</span></div>
+        <div class="stat"><strong>50</strong><span>Analysis-centric records</span></div>
+        <div class="stat"><strong>50</strong><span>Construction-centric records</span></div>
+        <div class="stat"><strong>5</strong><span>Primary categories</span></div>
+        <div class="stat"><strong>15</strong><span>Competition sources</span></div>
+        <div class="stat"><strong>2000-2025</strong><span>Problem year range</span></div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section id="overview">
+      <div class="section-head">
+        <h2>Overview</h2>
+        <p class="lead">
+          ComBench targets two capabilities that are both central to constructive combinatorics: proving the mathematical claim and realizing the requested object as a complete, checkable witness.
+        </p>
+      </div>
+      <div class="grid-3">
+        <article class="card accent-teal">
+          <h3>Rigorous Proof Reasoning</h3>
+          <p>Models must produce Olympiad-style arguments scored by item-specific 0/1/6/7 grading guidelines.</p>
+        </article>
+        <article class="card accent-blue">
+          <h3>Constructive Realization</h3>
+          <p>Construction-centric records require an explicit witness payload in the prescribed representation.</p>
+        </article>
+        <article class="card accent-coral">
+          <h3>Verifier-Gated Scoring</h3>
+          <p>Deterministic Python verifiers check construction payloads and calibrate high proof scores when a witness fails.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="benchmark">
+      <div class="section-head">
+        <h2>Benchmark Design</h2>
+        <p class="lead">
+          Problems are curated from major Olympiad-style competitions and grouped into stable combinatorial reasoning categories.
+        </p>
+      </div>
+      <div class="media-grid">
+        <div class="figure-box">
+          <img src="assets/taxonomy_donut.png" alt="Distribution of ComBench categories">
+          <p class="caption">Distribution of ComBench categories across 100 problems.</p>
+        </div>
+        <div class="card">
+          <h3>Annotation pipeline</h3>
+          <p>
+            Each record contains source metadata, the original problem, a reference answer, and problem-specific grading guidelines.
+            Construction-centric records additionally include a construction instruction, reference witness, verifier plan, deterministic verifier code, and semantic audit.
+          </p>
+          <p style="margin-top: 12px;">
+            The executable verifier reads the submitted construction payload through the same raw-standard-input interface used for model submissions.
+          </p>
+          <p style="margin-top: 12px;">
+            Protocol diagrams:
+            <a href="assets/pipeline.pdf">annotation pipeline</a> and
+            <a href="assets/eval.pdf">verifier-gated scoring rule</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="results">
+      <div class="section-head">
+        <h2>Main Results</h2>
+        <p class="lead">
+          ComBench remains far from saturated: the strongest model reaches 65.4% overall Avg. and 75.3% overall Best@4.
+        </p>
+      </div>
+      <div class="table-wrap" role="region" aria-label="Main evaluation results" tabindex="0">
+        <table>
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Analysis Avg.</th>
+              <th>Analysis Best@4</th>
+              <th>Construction Avg.</th>
+              <th>Construction Best@4</th>
+              <th>Overall Avg.</th>
+              <th>Overall Best@4</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>GPT-5.5</td><td class="score-best">62.4</td><td class="score-best">72.9</td><td class="score-best">68.4</td><td>77.7</td><td class="score-best">65.4</td><td class="score-best">75.3</td></tr>
+            <tr><td>Gemini-3.1-Pro</td><td>56.1</td><td>69.7</td><td>64.5</td><td>78.3</td><td>60.3</td><td>74.0</td></tr>
+            <tr><td>Kimi-K2.6</td><td>43.5</td><td>60.6</td><td>63.4</td><td class="score-best">83.7</td><td>53.5</td><td>72.1</td></tr>
+            <tr><td>DeepSeek-V4-Pro</td><td>37.8</td><td>56.6</td><td>52.6</td><td>67.7</td><td>45.2</td><td>62.1</td></tr>
+            <tr><td>Qwen3.6-Max</td><td>21.4</td><td>32.9</td><td>28.4</td><td>39.1</td><td>24.9</td><td>36.0</td></tr>
+            <tr><td>SU-01</td><td>20.9</td><td>30.3</td><td>28.8</td><td>41.1</td><td>24.8</td><td>35.7</td></tr>
+            <tr><td>GLM-5.1</td><td>21.6</td><td>36.0</td><td>25.6</td><td>37.1</td><td>23.6</td><td>36.6</td></tr>
+            <tr><td>Qwen3.6-35B</td><td>17.9</td><td>26.6</td><td>22.7</td><td>32.0</td><td>20.3</td><td>29.3</td></tr>
+            <tr><td>Nemotron-Cascade</td><td>21.8</td><td>32.9</td><td>17.4</td><td>28.0</td><td>19.6</td><td>30.4</td></tr>
+            <tr><td>Gemma-4-31B-IT</td><td>16.1</td><td>24.3</td><td>17.5</td><td>30.9</td><td>16.8</td><td>27.6</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Construction-Centric Analysis</h2>
+        <p class="lead">
+          A high proof score is not always accompanied by a valid executable construction.
+        </p>
+      </div>
+      <div class="table-wrap" role="region" aria-label="Construction-centric subset analysis" tabindex="0">
+        <table>
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Proof</th>
+              <th>Construction</th>
+              <th>Verifier-gated score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>GPT-5.5</td><td class="score-best">72.3</td><td class="score-best">75.0</td><td class="score-best">68.4</td></tr>
+            <tr><td>Gemini-3.1-Pro</td><td>68.9</td><td class="score-best">75.0</td><td>64.5</td></tr>
+            <tr><td>Kimi-K2.6</td><td>66.3</td><td class="score-best">75.0</td><td>63.4</td></tr>
+            <tr><td>DeepSeek-V4-Pro</td><td>56.1</td><td>62.5</td><td>52.6</td></tr>
+            <tr><td>SU-01</td><td>29.6</td><td>27.5</td><td>28.8</td></tr>
+            <tr><td>Qwen3.6-Max</td><td>31.5</td><td>38.0</td><td>28.4</td></tr>
+            <tr><td>GLM-5.1</td><td>29.0</td><td>27.0</td><td>25.6</td></tr>
+            <tr><td>Qwen3.6-35B</td><td>24.9</td><td>40.5</td><td>22.7</td></tr>
+            <tr><td>Gemma-4-31B-IT</td><td>20.9</td><td>15.0</td><td>17.5</td></tr>
+            <tr><td>Nemotron-Cascade</td><td>18.4</td><td>20.5</td><td>17.4</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Error Analysis</h2>
+        <p class="lead">
+          Below-full-credit proof failures concentrate on missing core mechanisms and wrong mathematical targets.
+        </p>
+      </div>
+      <div class="media-grid">
+        <div class="figure-box">
+          <img src="assets/error_reason_distribution.png" alt="Primary proof error distribution">
+          <p class="caption">Primary proof-error distribution over below-full-credit proof samples.</p>
+        </div>
+        <div class="callout">
+          <p>
+            The dominant failure mode is Missing Core Mechanism, accounting for 41.2% of below-full-credit proof solutions.
+            Wrong Mathematical Target accounts for another 20.0%, showing that many failures are mathematical rather than purely formatting related.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="citation">
+      <div class="section-head">
+        <h2>Citation</h2>
+        <p class="lead">Final bibliographic metadata will be updated after the public preprint is available.</p>
+      </div>
+      <pre class="code-block">@misc{combench2026,
+  title        = {ComBench: A Benchmark for Rigorous Proof Reasoning and Constructive Realization in Olympiad-Level Combinatorics},
+  author       = {Zhang, Shunkai and Zhang, Haoran and Luo, Yun and Cheng, Qianjia and Lei, Haodi and Li, Yizhuo and Zhan, Runzhe and Wang, Zhilin and Xu, Bangjie and Su, Yucheng and Han, Xinmiao and Qu, Xiaoye and Liu, Dongrui and Lin, Zhouchen and Qiao, Yu and Ding, Ning and Li, Yafu and Cheng, Yu},
+  year         = {2026},
+  note         = {Preprint coming soon}
+}</pre>
+    </section>
+  </main>
+
+  <footer>
+    ComBench project page. Code is available at github.com/Simplified-Reasoning/ComBench.
+  </footer>
+</body>
+</html>

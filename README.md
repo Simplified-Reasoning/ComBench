@@ -4,6 +4,8 @@ Code release for ComBench, an evaluation framework for Olympiad-level
 combinatorics reasoning with rubric-guided proof judging and executable
 construction verification.
 
+Project page: https://simplified-reasoning.github.io/ComBench/
+
 This repository contains the code needed to run the evaluation pipeline and
 the data-building utilities. The full benchmark data, human review materials,
 model outputs, and large experimental caches are not included in this code-only
@@ -113,4 +115,3 @@ two-part response and checks the construction payload with the verifier.
   part of this repository.
 - Large model outputs and evaluation caches should stay outside git.
 - The local construction verifier uses the vendored `src/prime_code/` runtime.
-
