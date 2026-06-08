@@ -1,7 +1,9 @@
 # ComBench: A Benchmark for Rigorous Proof Reasoning and Constructive Realization in Olympiad-Level Combinatorics
 
 <p align="center">
-  <img src="docs/assets/taxonomy_donut.png" alt="ComBench category distribution" width="70%">
+  <a href="docs/assets/pipeline.pdf">
+    <img src="docs/assets/pipeline.pdf" alt="ComBench annotation and verification pipeline" width="90%">
+  </a>
 </p>
 
 <p align="center">
