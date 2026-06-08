@@ -350,6 +350,15 @@
       height: auto;
     }
 
+    .pdf-figure {
+      display: block;
+      width: 100%;
+      min-height: 280px;
+      border: 0;
+      aspect-ratio: 1327 / 459;
+      background: var(--surface-2);
+    }
+
     .caption {
       margin: 10px 0 0;
       color: var(--muted);
@@ -785,8 +794,10 @@
       </div>
       <div class="analysis-grid">
         <div class="figure-panel">
-          <img src="assets/error_reason_distribution.png" alt="Primary proof error distribution">
-          <p class="caption" data-i18n="errorCaption">Primary proof-error distribution over below-full-credit proof samples.</p>
+          <object class="pdf-figure" data="assets/error.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" aria-label="Primary proof-error taxonomy">
+            <a href="assets/error.pdf" data-i18n="errorPdfFallback">Open the proof-error taxonomy PDF</a>
+          </object>
+          <p class="caption" data-i18n="errorCaption">Proof-error taxonomy used to categorize below-full-credit proof samples.</p>
         </div>
         <article class="card">
           <span class="tag" data-i18n="findingTag">Key finding</span>
@@ -887,7 +898,8 @@
         tableConstructionBest: "Construction Best@4",
         tableOverallAvg: "Overall Avg.",
         tableOverallBest: "Overall Best@4",
-        errorCaption: "Primary proof-error distribution over below-full-credit proof samples.",
+        errorPdfFallback: "Open the proof-error taxonomy PDF",
+        errorCaption: "Proof-error taxonomy used to categorize below-full-credit proof samples.",
         findingTag: "Key finding",
         findingTitle: "Proof quality and witness validity diverge",
         findingText: "Kimi-K2.6 trails GPT-5.5 on analysis-centric proof grading but achieves the strongest construction-centric Best@4, showing that constructive realization is not merely a by-product of stronger proof reasoning.",
@@ -955,7 +967,8 @@
         tableConstructionBest: "Construction Best@4",
         tableOverallAvg: "Overall Avg.",
         tableOverallBest: "Overall Best@4",
-        errorCaption: "未满分证明样本的主要错误类型分布。",
+        errorPdfFallback: "打开证明错误分类 PDF",
+        errorCaption: "用于标注未满分证明样本的证明错误分类体系。",
         findingTag: "核心发现",
         findingTitle: "证明质量与 witness 有效性并不等价",
         findingText: "Kimi-K2.6 在 analysis-centric 证明评分上落后于 GPT-5.5，但取得最强 construction-centric Best@4，说明构造实现并不是更强证明推理的简单副产品。",
