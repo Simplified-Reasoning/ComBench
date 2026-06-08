@@ -183,7 +183,6 @@
       width: 100%;
       height: auto;
       border: 0;
-      aspect-ratio: 16 / 9;
       background: var(--surface-2);
     }
 
@@ -374,7 +373,6 @@
       width: 100%;
       height: auto;
       border: 0;
-      aspect-ratio: 1417.35 / 566.85;
       background: var(--surface-2);
     }
 
@@ -701,9 +699,9 @@
           </div>
         </div>
         <div class="hero-visual">
-          <object class="pipeline-figure" data="assets/pipeline.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" aria-label="ComBench annotation pipeline">
-            <a href="assets/pipeline.pdf" data-i18n="heroPipelineFallback">Open the ComBench pipeline PDF</a>
-          </object>
+          <a href="assets/pipeline.pdf" aria-label="Open the ComBench pipeline PDF">
+            <img class="pipeline-figure" src="assets/pipeline.png" alt="ComBench annotation pipeline">
+          </a>
           <p class="caption" data-i18n="heroPipelineCaption">ComBench annotation and verification pipeline.</p>
         </div>
       </div>
@@ -823,9 +821,9 @@
       </div>
       <div class="analysis-grid">
         <div class="figure-panel">
-          <object class="pdf-figure" data="assets/error.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" aria-label="Primary proof-error taxonomy">
-            <a href="assets/error.pdf" data-i18n="errorPdfFallback">Open the proof-error taxonomy PDF</a>
-          </object>
+          <a href="assets/error.pdf" aria-label="Open the proof-error taxonomy PDF">
+            <img class="pdf-figure" src="assets/error_taxonomy.png" alt="Primary proof-error taxonomy">
+          </a>
           <p class="caption" data-i18n="errorCaption">Proof-error taxonomy used to categorize below-full-credit proof samples.</p>
         </div>
         <article class="card">

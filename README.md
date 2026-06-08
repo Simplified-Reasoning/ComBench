@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="docs/assets/pipeline.pdf">
-    <img src="docs/assets/pipeline.pdf" alt="ComBench annotation and verification pipeline" width="90%">
+    <img src="docs/assets/pipeline.png" alt="ComBench annotation and verification pipeline" width="90%">
   </a>
 </p>
 
