@@ -673,10 +673,10 @@
         Bangjie Xu, Yucheng Su, Xinmiao Han, Xiaoye Qu, Dongrui Liu, Zhouchen Lin, Yu Qiao, Ning Ding, Yafu Li, Yu Cheng
       </p>
       <div class="actions" aria-label="Resource links">
-        <a class="button disabled" href="#" aria-disabled="true" data-i18n="paperButton">Paper coming soon</a>
-        <a class="button primary" href="https://github.com/Simplified-Reasoning/ComBench" data-i18n="codeButton">Code</a>
-        <a class="button disabled" href="#" aria-disabled="true" data-i18n="dataButton">Data coming soon</a>
-        <a class="button disabled" href="#" aria-disabled="true" data-i18n="resultsButton">Results coming soon</a>
+        <a class="button disabled" href="#" aria-disabled="true" data-i18n="arxivButton">arXiv coming soon</a>
+        <a class="button primary" href="https://github.com/Simplified-Reasoning/ComBench" data-i18n="githubButton">GitHub</a>
+        <a class="button disabled" href="#" aria-disabled="true" data-i18n="datasetButton">Dataset HF coming soon</a>
+        <a class="button disabled" href="#" aria-disabled="true" data-i18n="dailyPaperButton">Daily Paper coming soon</a>
       </div>
       <div class="stats" aria-label="Benchmark statistics">
         <div class="stat"><strong>100</strong><span data-i18n="statProblems">Competition-level problems</span></div>
@@ -750,7 +750,7 @@
       </div>
       <p class="caption">
         <a href="assets/pipeline.pdf" data-i18n="pipelineLink">Annotation pipeline diagram</a>
-        <span> · </span>
+        <span> | </span>
         <a href="assets/eval.pdf" data-i18n="scoringLink">Verifier-gated scoring diagram</a>
       </p>
     </section>
@@ -815,19 +815,24 @@
       </div>
       <div class="resources">
         <article class="resource-card">
-          <h3 data-i18n="resourcePaperTitle">Paper</h3>
-          <p data-i18n="resourcePaperText">Preprint metadata and PDF link will be updated after release.</p>
-          <a class="button disabled" href="#" aria-disabled="true" data-i18n="paperButton">Paper coming soon</a>
+          <h3 data-i18n="resourceArxivTitle">arXiv</h3>
+          <p data-i18n="resourceArxivText">Preprint metadata and PDF link will be updated after release.</p>
+          <a class="button disabled" href="#" aria-disabled="true" data-i18n="arxivButton">arXiv coming soon</a>
         </article>
         <article class="resource-card">
-          <h3 data-i18n="resourceCodeTitle">Code</h3>
+          <h3 data-i18n="resourceGithubTitle">GitHub</h3>
           <p data-i18n="resourceCodeText">Evaluation pipeline, verifier runtime, data-building utilities, tests, and toy examples.</p>
-          <a class="button primary" href="https://github.com/Simplified-Reasoning/ComBench" data-i18n="codeButton">Code</a>
+          <a class="button primary" href="https://github.com/Simplified-Reasoning/ComBench" data-i18n="githubButton">GitHub</a>
         </article>
         <article class="resource-card">
-          <h3 data-i18n="resourceDataTitle">Data</h3>
+          <h3 data-i18n="resourceDatasetTitle">Dataset HF</h3>
           <p data-i18n="resourceDataText">Dataset and result artifacts are reserved for the public benchmark release.</p>
-          <a class="button disabled" href="#" aria-disabled="true" data-i18n="dataButton">Data coming soon</a>
+          <a class="button disabled" href="#" aria-disabled="true" data-i18n="datasetButton">Dataset HF coming soon</a>
+        </article>
+        <article class="resource-card">
+          <h3 data-i18n="resourceDailyPaperTitle">Daily Paper</h3>
+          <p data-i18n="resourceDailyPaperText">The Hugging Face Daily Paper entry will be linked after the arXiv page is available.</p>
+          <a class="button disabled" href="#" aria-disabled="true" data-i18n="dailyPaperButton">Daily Paper coming soon</a>
         </article>
       </div>
       <h3 style="margin-top: 30px;" data-i18n="citationTitle">Citation</h3>
@@ -854,10 +859,10 @@
         heroEyebrow: "Olympiad Combinatorics Benchmark",
         heroTitle: "A benchmark for rigorous proof reasoning and constructive realization in Olympiad-level combinatorics.",
         heroCopy: "ComBench evaluates large language models on 100 human-annotated competition-level combinatorics problems. It separates proof quality from explicit witness construction through rubric-guided judging and deterministic verifier-gated scoring.",
-        paperButton: "Paper coming soon",
-        codeButton: "Code",
-        dataButton: "Data coming soon",
-        resultsButton: "Results coming soon",
+        arxivButton: "arXiv coming soon",
+        githubButton: "GitHub",
+        datasetButton: "Dataset HF coming soon",
+        dailyPaperButton: "Daily Paper coming soon",
         statProblems: "Competition-level problems",
         statAnalysis: "Analysis-centric records",
         statConstruction: "Construction-centric records",
@@ -906,12 +911,14 @@
         errorText: "The dominant proof failure is Missing Core Mechanism at 41.2%, followed by Wrong Mathematical Target at 20.0%.",
         resourcesTitle: "Resources",
         resourcesLead: "The public code release is available now. Paper, dataset, and full result artifacts will be linked here when public URLs are finalized.",
-        resourcePaperTitle: "Paper",
-        resourcePaperText: "Preprint metadata and PDF link will be updated after release.",
-        resourceCodeTitle: "Code",
+        resourceArxivTitle: "arXiv",
+        resourceArxivText: "Preprint metadata and PDF link will be updated after release.",
+        resourceGithubTitle: "GitHub",
         resourceCodeText: "Evaluation pipeline, verifier runtime, data-building utilities, tests, and toy examples.",
-        resourceDataTitle: "Data",
+        resourceDatasetTitle: "Dataset HF",
         resourceDataText: "Dataset and result artifacts are reserved for the public benchmark release.",
+        resourceDailyPaperTitle: "Daily Paper",
+        resourceDailyPaperText: "The Hugging Face Daily Paper entry will be linked after the arXiv page is available.",
         citationTitle: "Citation",
         footerText: "ComBench project page. Code is available at github.com/Simplified-Reasoning/ComBench."
       },
@@ -923,10 +930,10 @@
         heroEyebrow: "奥林匹克组合数学基准",
         heroTitle: "面向奥林匹克级组合数学的严谨证明推理与构造实现基准。",
         heroCopy: "ComBench 包含 100 道由人工专家标注的竞赛级组合数学问题，通过 rubric-guided proof judging 与 deterministic verifier-gated scoring 区分证明质量和显式构造能力。",
-        paperButton: "论文即将发布",
-        codeButton: "代码",
-        dataButton: "数据即将发布",
-        resultsButton: "结果即将发布",
+        arxivButton: "arXiv 即将发布",
+        githubButton: "GitHub",
+        datasetButton: "Dataset HF 即将发布",
+        dailyPaperButton: "Daily Paper 即将发布",
         statProblems: "竞赛级问题",
         statAnalysis: "证明分析类记录",
         statConstruction: "构造实现类记录",
@@ -975,12 +982,14 @@
         errorText: "主要证明失败类型是 Missing Core Mechanism，占 41.2%；其次是 Wrong Mathematical Target，占 20.0%。",
         resourcesTitle: "资源",
         resourcesLead: "公开代码已经发布。论文、数据集和完整结果 artifact 将在 URL 确定后补充。",
-        resourcePaperTitle: "论文",
-        resourcePaperText: "预印本元信息和 PDF 链接将在发布后更新。",
-        resourceCodeTitle: "代码",
+        resourceArxivTitle: "arXiv",
+        resourceArxivText: "预印本元信息和 PDF 链接将在发布后更新。",
+        resourceGithubTitle: "GitHub",
         resourceCodeText: "包含评测 pipeline、verifier runtime、数据构建工具、测试和 toy examples。",
-        resourceDataTitle: "数据",
+        resourceDatasetTitle: "Dataset HF",
         resourceDataText: "数据集和结果 artifact 将随公开 benchmark release 发布。",
+        resourceDailyPaperTitle: "Daily Paper",
+        resourceDailyPaperText: "Hugging Face Daily Paper 条目将在 arXiv 页面可用后更新。",
         citationTitle: "引用",
         footerText: "ComBench project page。代码位于 github.com/Simplified-Reasoning/ComBench。"
       }
