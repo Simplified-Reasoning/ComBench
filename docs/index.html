@@ -143,12 +143,7 @@
       min-height: 86vh;
       overflow: hidden;
       border-bottom: 1px solid var(--line);
-      background:
-        linear-gradient(90deg, color-mix(in srgb, var(--bg) 96%, transparent) 0%, color-mix(in srgb, var(--bg) 90%, transparent) 46%, color-mix(in srgb, var(--bg) 65%, transparent) 100%),
-        url("assets/taxonomy_donut.png");
-      background-repeat: no-repeat;
-      background-position: center, right 5vw center;
-      background-size: auto, min(560px, 48vw);
+      background: linear-gradient(180deg, color-mix(in srgb, var(--surface-2) 42%, var(--bg)) 0%, var(--bg) 100%);
     }
 
     .hero::after {
@@ -166,6 +161,30 @@
       width: min(1180px, calc(100% - 32px));
       margin: 0 auto;
       padding: 92px 0 64px;
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(420px, 1.08fr);
+      gap: 34px;
+      align-items: center;
+    }
+
+    .hero-visual {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      padding: 14px;
+    }
+
+    .pipeline-figure {
+      display: block;
+      width: 100%;
+      min-height: 330px;
+      border: 0;
+      aspect-ratio: 16 / 9;
+      background: var(--surface-2);
     }
 
     .eyebrow {
@@ -580,8 +599,7 @@
       }
 
       .hero {
-        background-position: center, center bottom 18px;
-        background-size: auto, min(430px, 82vw);
+        min-height: auto;
       }
 
       .hero-inner {
@@ -589,6 +607,7 @@
       }
 
       .section-head,
+      .hero-layout,
       .overview-layout,
       .design-grid,
       .metric-grid,
@@ -662,21 +681,31 @@
 
   <section class="hero">
     <div class="hero-inner">
-      <div class="eyebrow" data-i18n="heroEyebrow">Olympiad Combinatorics Benchmark</div>
-      <h1>ComBench</h1>
-      <p class="subtitle" data-i18n="heroTitle">A benchmark for rigorous proof reasoning and constructive realization in Olympiad-level combinatorics.</p>
-      <p class="hero-copy" data-i18n="heroCopy">
-        ComBench evaluates large language models on 100 human-annotated competition-level combinatorics problems. It separates proof quality from explicit witness construction through rubric-guided judging and deterministic verifier-gated scoring.
-      </p>
-      <p class="authors">
-        Shunkai Zhang*, Haoran Zhang*, Yun Luo, Qianjia Cheng, Haodi Lei, Yizhuo Li, Runzhe Zhan, Zhilin Wang,
-        Bangjie Xu, Yucheng Su, Xinmiao Han, Xiaoye Qu, Dongrui Liu, Zhouchen Lin, Yu Qiao, Ning Ding, Yafu Li, Yu Cheng
-      </p>
-      <div class="actions" aria-label="Resource links">
-        <a class="button disabled" href="#" aria-disabled="true" data-i18n="arxivButton">arXiv coming soon</a>
-        <a class="button primary" href="https://github.com/Simplified-Reasoning/ComBench" data-i18n="githubButton">GitHub</a>
-        <a class="button disabled" href="#" aria-disabled="true" data-i18n="datasetButton">Dataset HF coming soon</a>
-        <a class="button disabled" href="#" aria-disabled="true" data-i18n="dailyPaperButton">Daily Paper coming soon</a>
+      <div class="hero-layout">
+        <div>
+          <div class="eyebrow" data-i18n="heroEyebrow">Olympiad Combinatorics Benchmark</div>
+          <h1>ComBench</h1>
+          <p class="subtitle" data-i18n="heroTitle">A benchmark for rigorous proof reasoning and constructive realization in Olympiad-level combinatorics.</p>
+          <p class="hero-copy" data-i18n="heroCopy">
+            ComBench evaluates large language models on 100 human-annotated competition-level combinatorics problems. It separates proof quality from explicit witness construction through rubric-guided judging and deterministic verifier-gated scoring.
+          </p>
+          <p class="authors">
+            Shunkai Zhang*, Haoran Zhang*, Yun Luo, Qianjia Cheng, Haodi Lei, Yizhuo Li, Runzhe Zhan, Zhilin Wang,
+            Bangjie Xu, Yucheng Su, Xinmiao Han, Xiaoye Qu, Dongrui Liu, Zhouchen Lin, Yu Qiao, Ning Ding, Yafu Li, Yu Cheng
+          </p>
+          <div class="actions" aria-label="Resource links">
+            <a class="button disabled" href="#" aria-disabled="true" data-i18n="arxivButton">arXiv coming soon</a>
+            <a class="button primary" href="https://github.com/Simplified-Reasoning/ComBench" data-i18n="githubButton">GitHub</a>
+            <a class="button disabled" href="#" aria-disabled="true" data-i18n="datasetButton">Dataset HF coming soon</a>
+            <a class="button disabled" href="#" aria-disabled="true" data-i18n="dailyPaperButton">Daily Paper coming soon</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <object class="pipeline-figure" data="assets/pipeline.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" aria-label="ComBench annotation pipeline">
+            <a href="assets/pipeline.pdf" data-i18n="heroPipelineFallback">Open the ComBench pipeline PDF</a>
+          </object>
+          <p class="caption" data-i18n="heroPipelineCaption">ComBench annotation and verification pipeline.</p>
+        </div>
       </div>
       <div class="stats" aria-label="Benchmark statistics">
         <div class="stat"><strong>100</strong><span data-i18n="statProblems">Competition-level problems</span></div>
@@ -859,6 +888,8 @@
         heroEyebrow: "Olympiad Combinatorics Benchmark",
         heroTitle: "A benchmark for rigorous proof reasoning and constructive realization in Olympiad-level combinatorics.",
         heroCopy: "ComBench evaluates large language models on 100 human-annotated competition-level combinatorics problems. It separates proof quality from explicit witness construction through rubric-guided judging and deterministic verifier-gated scoring.",
+        heroPipelineFallback: "Open the ComBench pipeline PDF",
+        heroPipelineCaption: "ComBench annotation and verification pipeline.",
         arxivButton: "arXiv coming soon",
         githubButton: "GitHub",
         datasetButton: "Dataset HF coming soon",
@@ -930,6 +961,8 @@
         heroEyebrow: "奥林匹克组合数学基准",
         heroTitle: "面向奥林匹克级组合数学的严谨证明推理与构造实现基准。",
         heroCopy: "ComBench 包含 100 道由人工专家标注的竞赛级组合数学问题，通过 rubric-guided proof judging 与 deterministic verifier-gated scoring 区分证明质量和显式构造能力。",
+        heroPipelineFallback: "打开 ComBench pipeline PDF",
+        heroPipelineCaption: "ComBench 标注与验证流程。",
         arxivButton: "arXiv 即将发布",
         githubButton: "GitHub",
         datasetButton: "Dataset HF 即将发布",
