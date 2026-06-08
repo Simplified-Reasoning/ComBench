@@ -7,19 +7,35 @@
   <meta name="description" content="ComBench: A benchmark for rigorous proof reasoning and constructive realization in Olympiad-level combinatorics.">
   <style>
     :root {
-      --bg: #f7f8fb;
-      --panel: #ffffff;
-      --ink: #17212f;
-      --muted: #5d6878;
-      --line: #d9dee8;
-      --teal: #167c80;
-      --blue: #345995;
-      --coral: #c75146;
-      --gold: #b8860b;
-      --green-soft: #eef8f5;
-      --blue-soft: #eef3fb;
-      --coral-soft: #fff1ee;
-      --shadow: 0 12px 34px rgba(23, 33, 47, 0.08);
+      --bg: #f6f7f9;
+      --surface: #ffffff;
+      --surface-2: #f0f4f7;
+      --text: #17202d;
+      --muted: #657183;
+      --line: #dce2ea;
+      --teal: #14807e;
+      --blue: #365fa0;
+      --coral: #c85a4c;
+      --amber: #b28316;
+      --green-soft: #eaf7f4;
+      --blue-soft: #edf4ff;
+      --coral-soft: #fff0ed;
+      --amber-soft: #fff7e6;
+      --shadow: 0 18px 48px rgba(23, 32, 45, 0.08);
+    }
+
+    body.dark {
+      --bg: #111620;
+      --surface: #18202c;
+      --surface-2: #202a38;
+      --text: #edf2f7;
+      --muted: #aab4c1;
+      --line: #334052;
+      --green-soft: #173431;
+      --blue-soft: #1a2942;
+      --coral-soft: #3a2220;
+      --amber-soft: #352a17;
+      --shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
     }
 
     * {
@@ -33,9 +49,9 @@
     body {
       margin: 0;
       background: var(--bg);
-      color: var(--ink);
+      color: var(--text);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.55;
+      line-height: 1.56;
     }
 
     a {
@@ -45,16 +61,16 @@
     .topbar {
       position: sticky;
       top: 0;
-      z-index: 10;
-      border-bottom: 1px solid rgba(217, 222, 232, 0.82);
-      background: rgba(247, 248, 251, 0.92);
-      backdrop-filter: blur(12px);
+      z-index: 20;
+      border-bottom: 1px solid color-mix(in srgb, var(--line) 78%, transparent);
+      background: color-mix(in srgb, var(--bg) 92%, transparent);
+      backdrop-filter: blur(14px);
     }
 
     .nav {
-      width: min(1120px, calc(100% - 32px));
+      width: min(1180px, calc(100% - 32px));
+      min-height: 62px;
       margin: 0 auto;
-      min-height: 58px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -62,9 +78,30 @@
     }
 
     .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       font-size: 18px;
-      font-weight: 800;
-      letter-spacing: 0;
+      font-weight: 850;
+      text-decoration: none;
+    }
+
+    .mark {
+      display: inline-grid;
+      width: 28px;
+      height: 28px;
+      place-items: center;
+      border-radius: 7px;
+      background: linear-gradient(135deg, var(--teal), var(--blue));
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
     }
 
     .navlinks {
@@ -80,72 +117,93 @@
     }
 
     .navlinks a:hover {
-      color: var(--ink);
+      color: var(--text);
+    }
+
+    .toggles {
+      display: flex;
+      gap: 8px;
+    }
+
+    .toggle {
+      min-height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--surface);
+      color: var(--text);
+      padding: 6px 10px;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 720;
+      cursor: pointer;
     }
 
     .hero {
       position: relative;
-      min-height: 84vh;
+      min-height: 86vh;
       overflow: hidden;
       border-bottom: 1px solid var(--line);
-      background: #fbfcff;
+      background:
+        linear-gradient(90deg, color-mix(in srgb, var(--bg) 96%, transparent) 0%, color-mix(in srgb, var(--bg) 90%, transparent) 46%, color-mix(in srgb, var(--bg) 65%, transparent) 100%),
+        url("assets/taxonomy_donut.png");
+      background-repeat: no-repeat;
+      background-position: center, right 5vw center;
+      background-size: auto, min(560px, 48vw);
     }
 
-    .hero::before {
+    .hero::after {
       content: "";
       position: absolute;
-      inset: 0;
-      background-image: url("assets/taxonomy_donut.png");
-      background-repeat: no-repeat;
-      background-position: right 6vw center;
-      background-size: min(520px, 46vw);
-      opacity: 0.26;
+      inset: auto 0 0 0;
+      height: 140px;
+      background: linear-gradient(180deg, transparent, var(--bg));
       pointer-events: none;
     }
 
     .hero-inner {
       position: relative;
-      width: min(1120px, calc(100% - 32px));
+      z-index: 1;
+      width: min(1180px, calc(100% - 32px));
       margin: 0 auto;
-      padding: 96px 0 58px;
+      padding: 92px 0 64px;
     }
 
-    .kicker {
+    .eyebrow {
       color: var(--teal);
       font-size: 13px;
-      font-weight: 800;
+      font-weight: 850;
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
     h1 {
-      margin: 12px 0 10px;
-      max-width: 760px;
-      font-size: clamp(48px, 8vw, 92px);
-      line-height: 0.98;
+      margin: 13px 0 10px;
+      max-width: 820px;
+      font-size: clamp(56px, 10vw, 112px);
+      line-height: 0.94;
       letter-spacing: 0;
     }
 
     .subtitle {
-      max-width: 850px;
+      max-width: 860px;
       margin: 0;
-      font-size: clamp(20px, 3vw, 32px);
+      color: color-mix(in srgb, var(--text) 90%, var(--muted));
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 780;
       line-height: 1.18;
-      font-weight: 760;
-      color: #233044;
     }
 
-    .abstract {
-      max-width: 820px;
+    .hero-copy {
+      max-width: 780px;
       margin: 22px 0 0;
       color: var(--muted);
       font-size: 17px;
     }
 
     .authors {
-      max-width: 900px;
-      margin: 20px 0 0;
-      color: #344255;
+      max-width: 940px;
+      margin: 18px 0 0;
+      color: color-mix(in srgb, var(--text) 72%, var(--muted));
       font-size: 14px;
     }
 
@@ -162,25 +220,31 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 9px 15px;
       border: 1px solid var(--line);
-      border-radius: 6px;
-      background: #ffffff;
-      box-shadow: 0 4px 14px rgba(23, 33, 47, 0.06);
-      color: var(--ink);
+      border-radius: 7px;
+      background: var(--surface);
+      box-shadow: 0 6px 18px rgba(23, 32, 45, 0.06);
+      color: var(--text);
+      padding: 9px 15px;
       font-size: 14px;
-      font-weight: 750;
+      font-weight: 780;
       text-decoration: none;
     }
 
     .button.primary {
-      border-color: #122237;
-      background: #122237;
+      border-color: #142033;
+      background: #142033;
       color: #ffffff;
     }
 
+    body.dark .button.primary {
+      border-color: #dfe8f4;
+      background: #dfe8f4;
+      color: #111620;
+    }
+
     .button.disabled {
-      color: #7b8492;
+      color: var(--muted);
       cursor: default;
       box-shadow: none;
     }
@@ -189,20 +253,22 @@
       display: grid;
       grid-template-columns: repeat(6, minmax(0, 1fr));
       gap: 10px;
-      margin-top: 48px;
+      margin-top: 44px;
+      max-width: 980px;
     }
 
     .stat {
       min-width: 0;
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.92);
-      padding: 14px;
+      background: color-mix(in srgb, var(--surface) 90%, transparent);
       box-shadow: var(--shadow);
+      padding: 14px;
     }
 
     .stat strong {
       display: block;
+      color: var(--text);
       font-size: 25px;
       line-height: 1;
     }
@@ -216,13 +282,13 @@
     }
 
     main {
-      width: min(1120px, calc(100% - 32px));
+      width: min(1180px, calc(100% - 32px));
       margin: 0 auto;
-      padding: 54px 0 70px;
+      padding: 52px 0 74px;
     }
 
     section {
-      margin-top: 54px;
+      margin-top: 68px;
     }
 
     section:first-child {
@@ -230,78 +296,55 @@
     }
 
     .section-head {
-      max-width: 780px;
-      margin-bottom: 20px;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 22px;
     }
 
-    h2 {
+    .section-head p {
+      max-width: 620px;
       margin: 0;
-      font-size: clamp(26px, 4vw, 38px);
-      line-height: 1.12;
-      letter-spacing: 0;
-    }
-
-    .lead {
-      margin: 10px 0 0;
       color: var(--muted);
       font-size: 16px;
     }
 
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
+    h2 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.1;
+      letter-spacing: 0;
     }
 
-    .card {
-      min-width: 0;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--panel);
-      padding: 18px;
-      box-shadow: 0 8px 24px rgba(23, 33, 47, 0.05);
-    }
-
-    .card h3 {
-      margin: 0 0 8px;
+    h3 {
+      margin: 0;
       font-size: 18px;
       line-height: 1.2;
     }
 
-    .card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .accent-teal {
-      border-top: 4px solid var(--teal);
-    }
-
-    .accent-blue {
-      border-top: 4px solid var(--blue);
-    }
-
-    .accent-coral {
-      border-top: 4px solid var(--coral);
-    }
-
-    .media-grid {
+    .overview-layout {
       display: grid;
-      grid-template-columns: 0.92fr 1.08fr;
+      grid-template-columns: 1.08fr 0.92fr;
       gap: 20px;
-      align-items: start;
+      align-items: stretch;
     }
 
-    .figure-box {
+    .figure-panel,
+    .card,
+    .resource-card,
+    .table-wrap {
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: #ffffff;
-      padding: 14px;
+      background: var(--surface);
       box-shadow: var(--shadow);
     }
 
-    .figure-box img {
+    .figure-panel {
+      padding: 16px;
+    }
+
+    .figure-panel img {
       display: block;
       width: 100%;
       height: auto;
@@ -313,25 +356,116 @@
       font-size: 13px;
     }
 
-    .table-wrap {
-      overflow-x: auto;
+    .mechanisms {
+      display: grid;
+      gap: 12px;
+    }
+
+    .mechanism {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 14px;
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: #ffffff;
-      box-shadow: var(--shadow);
+      background: var(--surface);
+      padding: 16px;
+      box-shadow: 0 8px 24px rgba(23, 32, 45, 0.05);
+    }
+
+    .number {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border-radius: 8px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-weight: 900;
+    }
+
+    .mechanism:nth-child(2) .number {
+      background: var(--green-soft);
+      color: var(--teal);
+    }
+
+    .mechanism:nth-child(3) .number {
+      background: var(--coral-soft);
+      color: var(--coral);
+    }
+
+    .mechanism p,
+    .card p,
+    .resource-card p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .design-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      min-width: 0;
+      padding: 18px;
+    }
+
+    .tag {
+      display: inline-flex;
+      margin-bottom: 12px;
+      border-radius: 999px;
+      background: var(--surface-2);
+      color: var(--muted);
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 780;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      padding: 18px;
+      box-shadow: 0 8px 24px rgba(23, 32, 45, 0.05);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 30px;
+      line-height: 1;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
     }
 
     table {
       width: 100%;
-      min-width: 760px;
+      min-width: 860px;
       border-collapse: collapse;
       font-size: 14px;
     }
 
     th,
     td {
-      padding: 10px 11px;
-      border-bottom: 1px solid #edf0f5;
+      border-bottom: 1px solid color-mix(in srgb, var(--line) 76%, transparent);
+      padding: 11px 12px;
       text-align: right;
       white-space: nowrap;
     }
@@ -339,41 +473,64 @@
     th:first-child,
     td:first-child {
       text-align: left;
-      font-weight: 720;
     }
 
-    thead th {
-      background: #f2f5fa;
-      color: #27364b;
+    th {
+      background: var(--surface-2);
+      color: color-mix(in srgb, var(--text) 80%, var(--muted));
       font-size: 12px;
-      text-transform: uppercase;
+      font-weight: 850;
       letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
 
-    tbody tr:nth-child(even) {
-      background: #fbfcfe;
+    td:first-child {
+      font-weight: 780;
     }
 
     tbody tr:last-child td {
       border-bottom: 0;
     }
 
-    .score-best {
-      color: var(--teal);
-      font-weight: 820;
+    .rank {
+      display: inline-grid;
+      width: 26px;
+      height: 26px;
+      margin-right: 8px;
+      place-items: center;
+      border-radius: 999px;
+      background: var(--surface-2);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
     }
 
-    .callout {
-      border: 1px solid #d7e7e5;
-      border-left: 5px solid var(--teal);
-      border-radius: 8px;
-      background: var(--green-soft);
+    .best {
+      color: var(--teal);
+      font-weight: 900;
+    }
+
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 20px;
+      align-items: start;
+      margin-top: 20px;
+    }
+
+    .resources {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .resource-card {
       padding: 18px;
     }
 
-    .callout p {
-      margin: 0;
-      color: #2a4b4d;
+    .resource-card .button {
+      margin-top: 14px;
+      width: 100%;
     }
 
     .code-block {
@@ -381,7 +538,7 @@
       border: 1px solid var(--line);
       border-radius: 8px;
       background: #101722;
-      color: #eef3fb;
+      color: #edf3fb;
       padding: 16px;
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
       font-size: 13px;
@@ -390,54 +547,75 @@
 
     footer {
       border-top: 1px solid var(--line);
-      padding: 26px 0;
+      padding: 28px 0;
       color: var(--muted);
       text-align: center;
       font-size: 13px;
     }
 
-    @media (max-width: 860px) {
+    @media (max-width: 920px) {
       .nav {
         align-items: flex-start;
         flex-direction: column;
         padding: 12px 0;
       }
 
-      .navlinks {
+      .nav-right {
         width: 100%;
+        justify-content: space-between;
+      }
+
+      .navlinks {
         overflow-x: auto;
         padding-bottom: 2px;
       }
 
-      .hero::before {
-        background-position: center bottom 12px;
-        background-size: min(420px, 82vw);
-        opacity: 0.18;
+      .hero {
+        background-position: center, center bottom 18px;
+        background-size: auto, min(430px, 82vw);
       }
 
       .hero-inner {
         padding-top: 58px;
       }
 
-      .stats,
-      .grid-3,
-      .media-grid {
+      .section-head,
+      .overview-layout,
+      .design-grid,
+      .metric-grid,
+      .analysis-grid,
+      .resources,
+      .stats {
         grid-template-columns: 1fr;
       }
 
-      .stats {
-        margin-top: 34px;
+      .section-head {
+        display: block;
+      }
+
+      .section-head p {
+        margin-top: 8px;
       }
     }
 
-    @media (max-width: 520px) {
-      .actions {
+    @media (max-width: 560px) {
+      .nav-right {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .actions,
+      .resources {
+        display: grid;
+        grid-template-columns: 1fr;
       }
 
       .button {
         width: 100%;
+      }
+
+      .mechanism {
+        grid-template-columns: 1fr;
       }
 
       table {
@@ -453,43 +631,51 @@
 </head>
 <body>
   <header class="topbar">
-    <nav class="nav" aria-label="Primary">
-      <a class="brand" href="#">ComBench</a>
-      <div class="navlinks">
-        <a href="#overview">Overview</a>
-        <a href="#benchmark">Benchmark</a>
-        <a href="#results">Results</a>
-        <a href="#citation">Citation</a>
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="brand" href="#">
+        <span class="mark">C</span>
+        <span>ComBench</span>
+      </a>
+      <div class="nav-right">
+        <div class="navlinks">
+          <a href="#overview" data-i18n="navOverview">Overview</a>
+          <a href="#design" data-i18n="navDesign">Design</a>
+          <a href="#evaluation" data-i18n="navEvaluation">Evaluation</a>
+          <a href="#resources" data-i18n="navResources">Resources</a>
+        </div>
+        <div class="toggles" aria-label="Display controls">
+          <button class="toggle" id="themeToggle" type="button">Dark</button>
+          <button class="toggle" id="langToggle" type="button">中文</button>
+        </div>
       </div>
     </nav>
   </header>
 
   <section class="hero">
     <div class="hero-inner">
-      <div class="kicker">Olympiad combinatorics benchmark</div>
+      <div class="eyebrow" data-i18n="heroEyebrow">Olympiad Combinatorics Benchmark</div>
       <h1>ComBench</h1>
-      <p class="subtitle">A benchmark for rigorous proof reasoning and constructive realization in Olympiad-level combinatorics.</p>
-      <p class="abstract">
-        ComBench evaluates large language models on 100 human-annotated competition-level combinatorics problems.
-        It separates proof quality from explicit witness construction through rubric-guided judging and deterministic verifier-gated scoring.
+      <p class="subtitle" data-i18n="heroTitle">A benchmark for rigorous proof reasoning and constructive realization in Olympiad-level combinatorics.</p>
+      <p class="hero-copy" data-i18n="heroCopy">
+        ComBench evaluates large language models on 100 human-annotated competition-level combinatorics problems. It separates proof quality from explicit witness construction through rubric-guided judging and deterministic verifier-gated scoring.
       </p>
       <p class="authors">
         Shunkai Zhang*, Haoran Zhang*, Yun Luo, Qianjia Cheng, Haodi Lei, Yizhuo Li, Runzhe Zhan, Zhilin Wang,
         Bangjie Xu, Yucheng Su, Xinmiao Han, Xiaoye Qu, Dongrui Liu, Zhouchen Lin, Yu Qiao, Ning Ding, Yafu Li, Yu Cheng
       </p>
-      <div class="actions" aria-label="Resources">
-        <a class="button disabled" href="#" aria-disabled="true">Paper coming soon</a>
-        <a class="button primary" href="https://github.com/Simplified-Reasoning/ComBench">Code</a>
-        <a class="button disabled" href="#" aria-disabled="true">Dataset coming soon</a>
-        <a class="button disabled" href="#" aria-disabled="true">Results coming soon</a>
+      <div class="actions" aria-label="Resource links">
+        <a class="button disabled" href="#" aria-disabled="true" data-i18n="paperButton">Paper coming soon</a>
+        <a class="button primary" href="https://github.com/Simplified-Reasoning/ComBench" data-i18n="codeButton">Code</a>
+        <a class="button disabled" href="#" aria-disabled="true" data-i18n="dataButton">Data coming soon</a>
+        <a class="button disabled" href="#" aria-disabled="true" data-i18n="resultsButton">Results coming soon</a>
       </div>
       <div class="stats" aria-label="Benchmark statistics">
-        <div class="stat"><strong>100</strong><span>Competition-level problems</span></div>
-        <div class="stat"><strong>50</strong><span>Analysis-centric records</span></div>
-        <div class="stat"><strong>50</strong><span>Construction-centric records</span></div>
-        <div class="stat"><strong>5</strong><span>Primary categories</span></div>
-        <div class="stat"><strong>15</strong><span>Competition sources</span></div>
-        <div class="stat"><strong>2000-2025</strong><span>Problem year range</span></div>
+        <div class="stat"><strong>100</strong><span data-i18n="statProblems">Competition-level problems</span></div>
+        <div class="stat"><strong>50</strong><span data-i18n="statAnalysis">Analysis-centric records</span></div>
+        <div class="stat"><strong>50</strong><span data-i18n="statConstruction">Construction-centric records</span></div>
+        <div class="stat"><strong>5</strong><span data-i18n="statCategories">Primary categories</span></div>
+        <div class="stat"><strong>15</strong><span data-i18n="statSources">Competition sources</span></div>
+        <div class="stat"><strong>2000-2025</strong><span data-i18n="statYears">Problem year range</span></div>
       </div>
     </div>
   </section>
@@ -497,152 +683,143 @@
   <main>
     <section id="overview">
       <div class="section-head">
-        <h2>Overview</h2>
-        <p class="lead">
-          ComBench targets two capabilities that are both central to constructive combinatorics: proving the mathematical claim and realizing the requested object as a complete, checkable witness.
-        </p>
+        <h2 data-i18n="overviewTitle">Overview</h2>
+        <p data-i18n="overviewLead">ComBench is designed to expose whether a model can both prove a combinatorial claim and realize the requested object as a complete, checkable witness.</p>
       </div>
-      <div class="grid-3">
-        <article class="card accent-teal">
-          <h3>Rigorous Proof Reasoning</h3>
-          <p>Models must produce Olympiad-style arguments scored by item-specific 0/1/6/7 grading guidelines.</p>
-        </article>
-        <article class="card accent-blue">
-          <h3>Constructive Realization</h3>
-          <p>Construction-centric records require an explicit witness payload in the prescribed representation.</p>
-        </article>
-        <article class="card accent-coral">
-          <h3>Verifier-Gated Scoring</h3>
-          <p>Deterministic Python verifiers check construction payloads and calibrate high proof scores when a witness fails.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="benchmark">
-      <div class="section-head">
-        <h2>Benchmark Design</h2>
-        <p class="lead">
-          Problems are curated from major Olympiad-style competitions and grouped into stable combinatorial reasoning categories.
-        </p>
-      </div>
-      <div class="media-grid">
-        <div class="figure-box">
+      <div class="overview-layout">
+        <div class="figure-panel">
           <img src="assets/taxonomy_donut.png" alt="Distribution of ComBench categories">
-          <p class="caption">Distribution of ComBench categories across 100 problems.</p>
+          <p class="caption" data-i18n="taxonomyCaption">Distribution of ComBench categories across 100 problems.</p>
         </div>
-        <div class="card">
-          <h3>Annotation pipeline</h3>
-          <p>
-            Each record contains source metadata, the original problem, a reference answer, and problem-specific grading guidelines.
-            Construction-centric records additionally include a construction instruction, reference witness, verifier plan, deterministic verifier code, and semantic audit.
-          </p>
-          <p style="margin-top: 12px;">
-            The executable verifier reads the submitted construction payload through the same raw-standard-input interface used for model submissions.
-          </p>
-          <p style="margin-top: 12px;">
-            Protocol diagrams:
-            <a href="assets/pipeline.pdf">annotation pipeline</a> and
-            <a href="assets/eval.pdf">verifier-gated scoring rule</a>.
-          </p>
+        <div class="mechanisms">
+          <article class="mechanism">
+            <div class="number">01</div>
+            <div>
+              <h3 data-i18n="overviewOneTitle">Curated Olympiad problems</h3>
+              <p data-i18n="overviewOneText">Records are drawn from major Olympiad-style competitions and grouped into five combinatorics categories.</p>
+            </div>
+          </article>
+          <article class="mechanism">
+            <div class="number">02</div>
+            <div>
+              <h3 data-i18n="overviewTwoTitle">Rubric-guided proof judging</h3>
+              <p data-i18n="overviewTwoText">Each item has problem-specific 0/1/6/7 grading guidelines for proof-side evaluation.</p>
+            </div>
+          </article>
+          <article class="mechanism">
+            <div class="number">03</div>
+            <div>
+              <h3 data-i18n="overviewThreeTitle">Executable construction checks</h3>
+              <p data-i18n="overviewThreeText">Construction-centric records require a witness payload checked by deterministic Python verifiers.</p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="results">
+    <section id="design">
       <div class="section-head">
-        <h2>Main Results</h2>
-        <p class="lead">
-          ComBench remains far from saturated: the strongest model reaches 65.4% overall Avg. and 75.3% overall Best@4.
-        </p>
+        <h2 data-i18n="designTitle">Design</h2>
+        <p data-i18n="designLead">The benchmark separates annotation, verification, and scoring so that proof reasoning and construction realization can be analyzed independently.</p>
       </div>
-      <div class="table-wrap" role="region" aria-label="Main evaluation results" tabindex="0">
+      <div class="design-grid">
+        <article class="card">
+          <span class="tag" data-i18n="designTagOne">Stage 1</span>
+          <h3 data-i18n="designOneTitle">Specification and rubric construction</h3>
+          <p data-i18n="designOneText">Human-expert intent, reference answers, and reference witnesses are converted into construction instructions and item-specific grading guidelines.</p>
+        </article>
+        <article class="card">
+          <span class="tag" data-i18n="designTagTwo">Stage 2</span>
+          <h3 data-i18n="designTwoTitle">Verifier generation and audit</h3>
+          <p data-i18n="designTwoText">Each construction task receives deterministic verifier code and a semantic audit for target fidelity and constraint coverage.</p>
+        </article>
+        <article class="card">
+          <span class="tag" data-i18n="designTagThree">Stage 3</span>
+          <h3 data-i18n="designThreeTitle">Verifier-gated scoring</h3>
+          <p data-i18n="designThreeText">Proof scores remain separate from construction validity, then high proof scores are calibrated when the required witness fails verification.</p>
+        </article>
+      </div>
+      <p class="caption">
+        <a href="assets/pipeline.pdf" data-i18n="pipelineLink">Annotation pipeline diagram</a>
+        <span> · </span>
+        <a href="assets/eval.pdf" data-i18n="scoringLink">Verifier-gated scoring diagram</a>
+      </p>
+    </section>
+
+    <section id="evaluation">
+      <div class="section-head">
+        <h2 data-i18n="evaluationTitle">Evaluation</h2>
+        <p data-i18n="evaluationLead">ComBench reports average performance and Best@4 under rubric-guided and verifier-gated evaluation.</p>
+      </div>
+      <div class="metric-grid">
+        <div class="metric"><strong>65.4</strong><span data-i18n="metricOne">Top overall Avg. score from GPT-5.5</span></div>
+        <div class="metric"><strong>75.3</strong><span data-i18n="metricTwo">Top overall Best@4 score from GPT-5.5</span></div>
+        <div class="metric"><strong>83.7</strong><span data-i18n="metricThree">Top construction-centric Best@4 from Kimi-K2.6</span></div>
+      </div>
+      <div class="table-wrap" role="region" aria-label="ComBench leaderboard" tabindex="0">
         <table>
           <thead>
             <tr>
-              <th>Model</th>
-              <th>Analysis Avg.</th>
-              <th>Analysis Best@4</th>
-              <th>Construction Avg.</th>
-              <th>Construction Best@4</th>
-              <th>Overall Avg.</th>
-              <th>Overall Best@4</th>
+              <th data-i18n="tableModel">Model</th>
+              <th data-i18n="tableAnalysisAvg">Analysis Avg.</th>
+              <th data-i18n="tableAnalysisBest">Analysis Best@4</th>
+              <th data-i18n="tableConstructionAvg">Construction Avg.</th>
+              <th data-i18n="tableConstructionBest">Construction Best@4</th>
+              <th data-i18n="tableOverallAvg">Overall Avg.</th>
+              <th data-i18n="tableOverallBest">Overall Best@4</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>GPT-5.5</td><td class="score-best">62.4</td><td class="score-best">72.9</td><td class="score-best">68.4</td><td>77.7</td><td class="score-best">65.4</td><td class="score-best">75.3</td></tr>
-            <tr><td>Gemini-3.1-Pro</td><td>56.1</td><td>69.7</td><td>64.5</td><td>78.3</td><td>60.3</td><td>74.0</td></tr>
-            <tr><td>Kimi-K2.6</td><td>43.5</td><td>60.6</td><td>63.4</td><td class="score-best">83.7</td><td>53.5</td><td>72.1</td></tr>
-            <tr><td>DeepSeek-V4-Pro</td><td>37.8</td><td>56.6</td><td>52.6</td><td>67.7</td><td>45.2</td><td>62.1</td></tr>
-            <tr><td>Qwen3.6-Max</td><td>21.4</td><td>32.9</td><td>28.4</td><td>39.1</td><td>24.9</td><td>36.0</td></tr>
-            <tr><td>SU-01</td><td>20.9</td><td>30.3</td><td>28.8</td><td>41.1</td><td>24.8</td><td>35.7</td></tr>
-            <tr><td>GLM-5.1</td><td>21.6</td><td>36.0</td><td>25.6</td><td>37.1</td><td>23.6</td><td>36.6</td></tr>
-            <tr><td>Qwen3.6-35B</td><td>17.9</td><td>26.6</td><td>22.7</td><td>32.0</td><td>20.3</td><td>29.3</td></tr>
-            <tr><td>Nemotron-Cascade</td><td>21.8</td><td>32.9</td><td>17.4</td><td>28.0</td><td>19.6</td><td>30.4</td></tr>
-            <tr><td>Gemma-4-31B-IT</td><td>16.1</td><td>24.3</td><td>17.5</td><td>30.9</td><td>16.8</td><td>27.6</td></tr>
+            <tr><td><span class="rank">1</span>GPT-5.5</td><td class="best">62.4</td><td class="best">72.9</td><td class="best">68.4</td><td>77.7</td><td class="best">65.4</td><td class="best">75.3</td></tr>
+            <tr><td><span class="rank">2</span>Gemini-3.1-Pro</td><td>56.1</td><td>69.7</td><td>64.5</td><td>78.3</td><td>60.3</td><td>74.0</td></tr>
+            <tr><td><span class="rank">3</span>Kimi-K2.6</td><td>43.5</td><td>60.6</td><td>63.4</td><td class="best">83.7</td><td>53.5</td><td>72.1</td></tr>
+            <tr><td><span class="rank">4</span>DeepSeek-V4-Pro</td><td>37.8</td><td>56.6</td><td>52.6</td><td>67.7</td><td>45.2</td><td>62.1</td></tr>
+            <tr><td><span class="rank">5</span>Qwen3.6-Max</td><td>21.4</td><td>32.9</td><td>28.4</td><td>39.1</td><td>24.9</td><td>36.0</td></tr>
+            <tr><td><span class="rank">6</span>SU-01</td><td>20.9</td><td>30.3</td><td>28.8</td><td>41.1</td><td>24.8</td><td>35.7</td></tr>
+            <tr><td><span class="rank">7</span>GLM-5.1</td><td>21.6</td><td>36.0</td><td>25.6</td><td>37.1</td><td>23.6</td><td>36.6</td></tr>
+            <tr><td><span class="rank">8</span>Qwen3.6-35B</td><td>17.9</td><td>26.6</td><td>22.7</td><td>32.0</td><td>20.3</td><td>29.3</td></tr>
+            <tr><td><span class="rank">9</span>Nemotron-Cascade</td><td>21.8</td><td>32.9</td><td>17.4</td><td>28.0</td><td>19.6</td><td>30.4</td></tr>
+            <tr><td><span class="rank">10</span>Gemma-4-31B-IT</td><td>16.1</td><td>24.3</td><td>17.5</td><td>30.9</td><td>16.8</td><td>27.6</td></tr>
           </tbody>
         </table>
       </div>
-    </section>
-
-    <section>
-      <div class="section-head">
-        <h2>Construction-Centric Analysis</h2>
-        <p class="lead">
-          A high proof score is not always accompanied by a valid executable construction.
-        </p>
-      </div>
-      <div class="table-wrap" role="region" aria-label="Construction-centric subset analysis" tabindex="0">
-        <table>
-          <thead>
-            <tr>
-              <th>Model</th>
-              <th>Proof</th>
-              <th>Construction</th>
-              <th>Verifier-gated score</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>GPT-5.5</td><td class="score-best">72.3</td><td class="score-best">75.0</td><td class="score-best">68.4</td></tr>
-            <tr><td>Gemini-3.1-Pro</td><td>68.9</td><td class="score-best">75.0</td><td>64.5</td></tr>
-            <tr><td>Kimi-K2.6</td><td>66.3</td><td class="score-best">75.0</td><td>63.4</td></tr>
-            <tr><td>DeepSeek-V4-Pro</td><td>56.1</td><td>62.5</td><td>52.6</td></tr>
-            <tr><td>SU-01</td><td>29.6</td><td>27.5</td><td>28.8</td></tr>
-            <tr><td>Qwen3.6-Max</td><td>31.5</td><td>38.0</td><td>28.4</td></tr>
-            <tr><td>GLM-5.1</td><td>29.0</td><td>27.0</td><td>25.6</td></tr>
-            <tr><td>Qwen3.6-35B</td><td>24.9</td><td>40.5</td><td>22.7</td></tr>
-            <tr><td>Gemma-4-31B-IT</td><td>20.9</td><td>15.0</td><td>17.5</td></tr>
-            <tr><td>Nemotron-Cascade</td><td>18.4</td><td>20.5</td><td>17.4</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section>
-      <div class="section-head">
-        <h2>Error Analysis</h2>
-        <p class="lead">
-          Below-full-credit proof failures concentrate on missing core mechanisms and wrong mathematical targets.
-        </p>
-      </div>
-      <div class="media-grid">
-        <div class="figure-box">
+      <div class="analysis-grid">
+        <div class="figure-panel">
           <img src="assets/error_reason_distribution.png" alt="Primary proof error distribution">
-          <p class="caption">Primary proof-error distribution over below-full-credit proof samples.</p>
+          <p class="caption" data-i18n="errorCaption">Primary proof-error distribution over below-full-credit proof samples.</p>
         </div>
-        <div class="callout">
-          <p>
-            The dominant failure mode is Missing Core Mechanism, accounting for 41.2% of below-full-credit proof solutions.
-            Wrong Mathematical Target accounts for another 20.0%, showing that many failures are mathematical rather than purely formatting related.
-          </p>
-        </div>
+        <article class="card">
+          <span class="tag" data-i18n="findingTag">Key finding</span>
+          <h3 data-i18n="findingTitle">Proof quality and witness validity diverge</h3>
+          <p data-i18n="findingText">Kimi-K2.6 trails GPT-5.5 on analysis-centric proof grading but achieves the strongest construction-centric Best@4, showing that constructive realization is not merely a by-product of stronger proof reasoning.</p>
+          <p data-i18n="errorText">The dominant proof failure is Missing Core Mechanism at 41.2%, followed by Wrong Mathematical Target at 20.0%.</p>
+        </article>
       </div>
     </section>
 
-    <section id="citation">
+    <section id="resources">
       <div class="section-head">
-        <h2>Citation</h2>
-        <p class="lead">Final bibliographic metadata will be updated after the public preprint is available.</p>
+        <h2 data-i18n="resourcesTitle">Resources</h2>
+        <p data-i18n="resourcesLead">The public code release is available now. Paper, dataset, and full result artifacts will be linked here when public URLs are finalized.</p>
       </div>
+      <div class="resources">
+        <article class="resource-card">
+          <h3 data-i18n="resourcePaperTitle">Paper</h3>
+          <p data-i18n="resourcePaperText">Preprint metadata and PDF link will be updated after release.</p>
+          <a class="button disabled" href="#" aria-disabled="true" data-i18n="paperButton">Paper coming soon</a>
+        </article>
+        <article class="resource-card">
+          <h3 data-i18n="resourceCodeTitle">Code</h3>
+          <p data-i18n="resourceCodeText">Evaluation pipeline, verifier runtime, data-building utilities, tests, and toy examples.</p>
+          <a class="button primary" href="https://github.com/Simplified-Reasoning/ComBench" data-i18n="codeButton">Code</a>
+        </article>
+        <article class="resource-card">
+          <h3 data-i18n="resourceDataTitle">Data</h3>
+          <p data-i18n="resourceDataText">Dataset and result artifacts are reserved for the public benchmark release.</p>
+          <a class="button disabled" href="#" aria-disabled="true" data-i18n="dataButton">Data coming soon</a>
+        </article>
+      </div>
+      <h3 style="margin-top: 30px;" data-i18n="citationTitle">Citation</h3>
       <pre class="code-block">@misc{combench2026,
   title        = {ComBench: A Benchmark for Rigorous Proof Reasoning and Constructive Realization in Olympiad-Level Combinatorics},
   author       = {Zhang, Shunkai and Zhang, Haoran and Luo, Yun and Cheng, Qianjia and Lei, Haodi and Li, Yizhuo and Zhan, Runzhe and Wang, Zhilin and Xu, Bangjie and Su, Yucheng and Han, Xinmiao and Qu, Xiaoye and Liu, Dongrui and Lin, Zhouchen and Qiao, Yu and Ding, Ning and Li, Yafu and Cheng, Yu},
@@ -652,8 +829,171 @@
     </section>
   </main>
 
-  <footer>
+  <footer data-i18n="footerText">
     ComBench project page. Code is available at github.com/Simplified-Reasoning/ComBench.
   </footer>
+
+  <script>
+    const translations = {
+      en: {
+        navOverview: "Overview",
+        navDesign: "Design",
+        navEvaluation: "Evaluation",
+        navResources: "Resources",
+        heroEyebrow: "Olympiad Combinatorics Benchmark",
+        heroTitle: "A benchmark for rigorous proof reasoning and constructive realization in Olympiad-level combinatorics.",
+        heroCopy: "ComBench evaluates large language models on 100 human-annotated competition-level combinatorics problems. It separates proof quality from explicit witness construction through rubric-guided judging and deterministic verifier-gated scoring.",
+        paperButton: "Paper coming soon",
+        codeButton: "Code",
+        dataButton: "Data coming soon",
+        resultsButton: "Results coming soon",
+        statProblems: "Competition-level problems",
+        statAnalysis: "Analysis-centric records",
+        statConstruction: "Construction-centric records",
+        statCategories: "Primary categories",
+        statSources: "Competition sources",
+        statYears: "Problem year range",
+        overviewTitle: "Overview",
+        overviewLead: "ComBench is designed to expose whether a model can both prove a combinatorial claim and realize the requested object as a complete, checkable witness.",
+        taxonomyCaption: "Distribution of ComBench categories across 100 problems.",
+        overviewOneTitle: "Curated Olympiad problems",
+        overviewOneText: "Records are drawn from major Olympiad-style competitions and grouped into five combinatorics categories.",
+        overviewTwoTitle: "Rubric-guided proof judging",
+        overviewTwoText: "Each item has problem-specific 0/1/6/7 grading guidelines for proof-side evaluation.",
+        overviewThreeTitle: "Executable construction checks",
+        overviewThreeText: "Construction-centric records require a witness payload checked by deterministic Python verifiers.",
+        designTitle: "Design",
+        designLead: "The benchmark separates annotation, verification, and scoring so that proof reasoning and construction realization can be analyzed independently.",
+        designTagOne: "Stage 1",
+        designOneTitle: "Specification and rubric construction",
+        designOneText: "Human-expert intent, reference answers, and reference witnesses are converted into construction instructions and item-specific grading guidelines.",
+        designTagTwo: "Stage 2",
+        designTwoTitle: "Verifier generation and audit",
+        designTwoText: "Each construction task receives deterministic verifier code and a semantic audit for target fidelity and constraint coverage.",
+        designTagThree: "Stage 3",
+        designThreeTitle: "Verifier-gated scoring",
+        designThreeText: "Proof scores remain separate from construction validity, then high proof scores are calibrated when the required witness fails verification.",
+        pipelineLink: "Annotation pipeline diagram",
+        scoringLink: "Verifier-gated scoring diagram",
+        evaluationTitle: "Evaluation",
+        evaluationLead: "ComBench reports average performance and Best@4 under rubric-guided and verifier-gated evaluation.",
+        metricOne: "Top overall Avg. score from GPT-5.5",
+        metricTwo: "Top overall Best@4 score from GPT-5.5",
+        metricThree: "Top construction-centric Best@4 from Kimi-K2.6",
+        tableModel: "Model",
+        tableAnalysisAvg: "Analysis Avg.",
+        tableAnalysisBest: "Analysis Best@4",
+        tableConstructionAvg: "Construction Avg.",
+        tableConstructionBest: "Construction Best@4",
+        tableOverallAvg: "Overall Avg.",
+        tableOverallBest: "Overall Best@4",
+        errorCaption: "Primary proof-error distribution over below-full-credit proof samples.",
+        findingTag: "Key finding",
+        findingTitle: "Proof quality and witness validity diverge",
+        findingText: "Kimi-K2.6 trails GPT-5.5 on analysis-centric proof grading but achieves the strongest construction-centric Best@4, showing that constructive realization is not merely a by-product of stronger proof reasoning.",
+        errorText: "The dominant proof failure is Missing Core Mechanism at 41.2%, followed by Wrong Mathematical Target at 20.0%.",
+        resourcesTitle: "Resources",
+        resourcesLead: "The public code release is available now. Paper, dataset, and full result artifacts will be linked here when public URLs are finalized.",
+        resourcePaperTitle: "Paper",
+        resourcePaperText: "Preprint metadata and PDF link will be updated after release.",
+        resourceCodeTitle: "Code",
+        resourceCodeText: "Evaluation pipeline, verifier runtime, data-building utilities, tests, and toy examples.",
+        resourceDataTitle: "Data",
+        resourceDataText: "Dataset and result artifacts are reserved for the public benchmark release.",
+        citationTitle: "Citation",
+        footerText: "ComBench project page. Code is available at github.com/Simplified-Reasoning/ComBench."
+      },
+      zh: {
+        navOverview: "概览",
+        navDesign: "设计",
+        navEvaluation: "评测",
+        navResources: "资源",
+        heroEyebrow: "奥林匹克组合数学基准",
+        heroTitle: "面向奥林匹克级组合数学的严谨证明推理与构造实现基准。",
+        heroCopy: "ComBench 包含 100 道由人工专家标注的竞赛级组合数学问题，通过 rubric-guided proof judging 与 deterministic verifier-gated scoring 区分证明质量和显式构造能力。",
+        paperButton: "论文即将发布",
+        codeButton: "代码",
+        dataButton: "数据即将发布",
+        resultsButton: "结果即将发布",
+        statProblems: "竞赛级问题",
+        statAnalysis: "证明分析类记录",
+        statConstruction: "构造实现类记录",
+        statCategories: "一级类别",
+        statSources: "竞赛来源",
+        statYears: "题目年份范围",
+        overviewTitle: "概览",
+        overviewLead: "ComBench 用来检验模型是否既能证明组合数学命题，又能给出完整、可检查的目标构造。",
+        taxonomyCaption: "100 道 ComBench 问题的类别分布。",
+        overviewOneTitle: "精选奥赛题源",
+        overviewOneText: "记录来自主要奥林匹克风格竞赛，并划分为五类组合数学推理任务。",
+        overviewTwoTitle: "基于评分标准的证明评测",
+        overviewTwoText: "每道题都有面向证明侧评测的 0/1/6/7 问题专属评分标准。",
+        overviewThreeTitle: "可执行构造检查",
+        overviewThreeText: "构造类记录要求模型提交 witness payload，并由确定性的 Python verifier 检查。",
+        designTitle: "设计",
+        designLead: "基准将标注、验证和评分拆开，使证明推理与构造实现可以被分别分析。",
+        designTagOne: "阶段 1",
+        designOneTitle: "任务规格与评分标准构造",
+        designOneText: "人工专家意图、参考答案和参考 witness 被转化为构造指令和题目专属评分标准。",
+        designTagTwo: "阶段 2",
+        designTwoTitle: "Verifier 生成与语义审计",
+        designTwoText: "每个构造任务配备确定性 verifier 代码，并经过目标一致性和约束覆盖的语义审计。",
+        designTagThree: "阶段 3",
+        designThreeTitle: "Verifier-gated scoring",
+        designThreeText: "证明分数与构造有效性保持独立；当高分证明未能通过构造验证时，再进行校准降分。",
+        pipelineLink: "标注流程图",
+        scoringLink: "Verifier-gated 评分规则图",
+        evaluationTitle: "评测",
+        evaluationLead: "ComBench 在 rubric-guided 与 verifier-gated 评测下报告平均分和 Best@4。",
+        metricOne: "GPT-5.5 的最高 overall Avg.",
+        metricTwo: "GPT-5.5 的最高 overall Best@4",
+        metricThree: "Kimi-K2.6 的最高 construction-centric Best@4",
+        tableModel: "模型",
+        tableAnalysisAvg: "Analysis Avg.",
+        tableAnalysisBest: "Analysis Best@4",
+        tableConstructionAvg: "Construction Avg.",
+        tableConstructionBest: "Construction Best@4",
+        tableOverallAvg: "Overall Avg.",
+        tableOverallBest: "Overall Best@4",
+        errorCaption: "未满分证明样本的主要错误类型分布。",
+        findingTag: "核心发现",
+        findingTitle: "证明质量与 witness 有效性并不等价",
+        findingText: "Kimi-K2.6 在 analysis-centric 证明评分上落后于 GPT-5.5，但取得最强 construction-centric Best@4，说明构造实现并不是更强证明推理的简单副产品。",
+        errorText: "主要证明失败类型是 Missing Core Mechanism，占 41.2%；其次是 Wrong Mathematical Target，占 20.0%。",
+        resourcesTitle: "资源",
+        resourcesLead: "公开代码已经发布。论文、数据集和完整结果 artifact 将在 URL 确定后补充。",
+        resourcePaperTitle: "论文",
+        resourcePaperText: "预印本元信息和 PDF 链接将在发布后更新。",
+        resourceCodeTitle: "代码",
+        resourceCodeText: "包含评测 pipeline、verifier runtime、数据构建工具、测试和 toy examples。",
+        resourceDataTitle: "数据",
+        resourceDataText: "数据集和结果 artifact 将随公开 benchmark release 发布。",
+        citationTitle: "引用",
+        footerText: "ComBench project page。代码位于 github.com/Simplified-Reasoning/ComBench。"
+      }
+    };
+
+    const body = document.body;
+    const themeToggle = document.getElementById("themeToggle");
+    const langToggle = document.getElementById("langToggle");
+    let lang = "en";
+
+    themeToggle.addEventListener("click", () => {
+      body.classList.toggle("dark");
+      themeToggle.textContent = body.classList.contains("dark") ? "Light" : "Dark";
+    });
+
+    langToggle.addEventListener("click", () => {
+      lang = lang === "en" ? "zh" : "en";
+      document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+      langToggle.textContent = lang === "zh" ? "EN" : "中文";
+      document.querySelectorAll("[data-i18n]").forEach((node) => {
+        const key = node.dataset.i18n;
+        if (translations[lang][key]) {
+          node.textContent = translations[lang][key];
+        }
+      });
+    });
+  </script>
 </body>
 </html>
