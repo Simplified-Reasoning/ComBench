@@ -8,7 +8,7 @@
 
 <p align="center">
   <a href="#"><img alt="arXiv" src="https://img.shields.io/badge/arXiv-coming%20soon-b31b1b"></a>
-  <a href="https://simplified-reasoning.github.io/ComBench/"><img alt="Project Page" src="https://img.shields.io/badge/Project%20Page-ComBench-14807e"></a>
+  <a href="https://simplified-reasoning.github.io/ComBench/docs/"><img alt="Project Page" src="https://img.shields.io/badge/Project%20Page-ComBench-14807e"></a>
   <a href="https://github.com/Simplified-Reasoning/ComBench"><img alt="GitHub" src="https://img.shields.io/badge/GitHub-Code-24292f"></a>
   <a href="#"><img alt="Dataset HF" src="https://img.shields.io/badge/Dataset%20HF-coming%20soon-ffcc4d"></a>
   <a href="#"><img alt="Daily Paper" src="https://img.shields.io/badge/HF%20Daily%20Paper-coming%20soon-ff8c00"></a>
