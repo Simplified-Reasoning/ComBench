@@ -7,11 +7,11 @@
 </p>
 
 <p align="center">
-  <a href="#"><img alt="arXiv" src="https://img.shields.io/badge/arXiv-coming%20soon-b31b1b"></a>
+  <a href="https://arxiv.org/abs/2606.10479"><img alt="arXiv" src="https://img.shields.io/badge/arXiv-2606.10479-b31b1b"></a>
   <a href="https://simplified-reasoning.github.io/ComBench/docs/"><img alt="Project Page" src="https://img.shields.io/badge/Project%20Page-ComBench-14807e"></a>
   <a href="https://github.com/Simplified-Reasoning/ComBench"><img alt="GitHub" src="https://img.shields.io/badge/GitHub-Code-24292f"></a>
   <a href="#"><img alt="Dataset HF" src="https://img.shields.io/badge/Dataset%20HF-coming%20soon-ffcc4d"></a>
-  <a href="#"><img alt="Daily Paper" src="https://img.shields.io/badge/HF%20Daily%20Paper-coming%20soon-ff8c00"></a>
+  <a href="https://huggingface.co/papers/2606.10479"><img alt="Daily Paper" src="https://img.shields.io/badge/HF%20Daily%20Paper-2606.10479-ff8c00"></a>
 </p>
 
 ComBench is an Olympiad-level combinatorics benchmark for evaluating two
@@ -22,8 +22,9 @@ deterministic verifier-gated scoring for construction-centric records.
 ## News
 
 - **2026-06-08**: Project page and public code release are available.
-- arXiv, Hugging Face dataset, and Hugging Face Daily Paper links will be
-  updated after the corresponding public resources are created.
+- **2026-06-10**: arXiv preprint and Hugging Face Daily Paper entry are available.
+- Hugging Face dataset links will be updated after the corresponding public
+  resource is created.
 
 ## Introduction
 
@@ -161,7 +162,10 @@ two-part response and checks the construction payload with the verifier.
   title        = {ComBench: A Benchmark for Rigorous Proof Reasoning and Constructive Realization in Olympiad-Level Combinatorics},
   author       = {Zhang, Shunkai and Zhang, Haoran and Luo, Yun and Cheng, Qianjia and Lei, Haodi and Li, Yizhuo and Zhan, Runzhe and Wang, Zhilin and Xu, Bangjie and Su, Yucheng and Han, Xinmiao and Qu, Xiaoye and Liu, Dongrui and Lin, Zhouchen and Qiao, Yu and Ding, Ning and Li, Yafu and Cheng, Yu},
   year         = {2026},
-  note         = {Preprint coming soon}
+  eprint       = {2606.10479},
+  archivePrefix = {arXiv},
+  primaryClass = {cs.AI},
+  url          = {https://arxiv.org/abs/2606.10479}
 }
 ```
 
